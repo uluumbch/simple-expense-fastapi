@@ -20,3 +20,10 @@ def read_transaction(transaction_id: str):
 def create_transaction(transaction: Transaction):
     transaction_id = crud.add_transaction(transaction.dict())
     return {"id": transaction_id}
+
+@app.delete("/transactions/{transaction_id}")
+def delete_transaction(transaction_id: str):
+    if not crud.get_transaction(transaction_id):
+        raise HTTPException(status_code=404, detail="Transaction not found")
+    crud.delete_transaction(transaction_id)
+    return {"message": "Transaction deleted"}
