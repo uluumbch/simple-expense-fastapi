@@ -6,8 +6,8 @@ from typing import Literal
 from datetime import datetime
 
 class Transaction(BaseModel):
-    amount: Annotated[Decimal, Field(strict=True, allow_inf_nan=True)] # Jumlah transaksi
-    category: str  # Kategori transaksi (misal: Makan, Gaji, Transport)
-    type: Literal["income", "expense"]  # income untuk pemasukan, expense untuk pengeluaran
-    description: str
-    date: datetime
+    amount: Annotated[int, Field(description="Jumlah uang transaksi dalam satuan IDR (string atau integer)")]
+    category: str=Field(description="Kategori transaksi, contoh: 'makanan', 'belanja', 'gaji'")
+    type: Literal["income", "expense"] = Field(description="Tipe transaksi, 'income' atau 'expense'")
+    description: str=Field(description="Deskripsi transaksi")
+    date: datetime=Field(description="Tanggal transaksi dalam format YYYY-MM-DD")
