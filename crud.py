@@ -29,3 +29,7 @@ def delete_transaction(transaction_id):
 def update_transaction(transaction_id, transaction_data):
     transactions_ref.document(transaction_id).update(transaction_data)
     return True
+
+def get_balance():
+    transactions = get_transactions()
+    return sum([transaction["amount"] for transaction in transactions])

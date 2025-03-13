@@ -120,6 +120,14 @@ Alternatif lain adalah menggunakan Docker dengan bantuan `devcontainer`:
 5. **Menghapus Transaksi**
    - Endpoint: `DELETE /transactions/{transaction_id}`
 
+6. **Melihat Jumlah Saldo**
+   - Endpoint: `GET /balance`
+   - Respon:
+     ```json
+     {
+       "balance": 5000
+     }
+     ```
 ---
 
 ## 📖 Dokumentasi API

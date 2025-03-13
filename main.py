@@ -39,3 +39,7 @@ def delete_transaction(transaction_id: str):
         raise HTTPException(status_code=404, detail="Transaction not found")
     crud.delete_transaction(transaction_id)
     return {"message": "Transaction deleted"}
+
+@app.get("/balance/", summary="Get Balance")
+def get_balance():
+    return {"balance": crud.get_balance()}
