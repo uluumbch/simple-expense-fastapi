@@ -2,7 +2,11 @@ from fastapi import FastAPI, HTTPException
 import crud
 from models import Transaction
 
-app = FastAPI()
+app = FastAPI(
+    title="Transactions API",
+    description="A simple API to manage transactions",
+    version="0.1"
+)
 
 
 @app.get("/transactions/", summary="Read all Transactions")
