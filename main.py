@@ -5,23 +5,31 @@ from models import Transaction
 app = FastAPI()
 
 
-@app.get("/transactions/")
+@app.get("/transactions/", summary="Read all Transactions")
 def read_transactions():
     return crud.get_transactions()
 
-@app.get("/transactions/{transaction_id}")
+@app.get("/transactions/{transaction_id}", summary="Read Transaction by ID")
 def read_transaction(transaction_id: str):
     transaction = crud.get_transaction(transaction_id)
     if not transaction:
         raise HTTPException(status_code=404, detail="Transaction not found")
     return transaction
 
-@app.post("/transactions/")
+@app.post("/transactions/", summary="Create a Transaction")
 def create_transaction(transaction: Transaction):
     transaction_id = crud.add_transaction(transaction.dict())
     return {"id": transaction_id}
 
-@app.delete("/transactions/{transaction_id}")
+@app.put("/transactions/{transaction_id}", summary="Update a Transaction")
+def update_transaction(transaction_id: str, transaction: Transaction):
+    if not crud.get_transaction(transaction_id):
+        raise HTTPException(status_code=404, detail="Transaction not found")
+    crud.update_transaction(transaction_id, transaction.dict())
+    return {"message": "Transaction updated"}
+
+
+@app.delete("/transactions/{transaction_id}", summary="Delete a Transaction")
 def delete_transaction(transaction_id: str):
     if not crud.get_transaction(transaction_id):
         raise HTTPException(status_code=404, detail="Transaction not found")

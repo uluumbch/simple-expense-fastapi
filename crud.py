@@ -25,3 +25,7 @@ def add_transaction(transaction_data):
 def delete_transaction(transaction_id):
     transactions_ref.document(transaction_id).delete()
     return True
+
+def update_transaction(transaction_id, transaction_data):
+    transactions_ref.document(transaction_id).update(transaction_data)
+    return True
